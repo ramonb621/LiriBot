@@ -13,15 +13,28 @@ var params = input;
 // var song = tracks.href.items;
 
 switch(params[0]){
+
   case "do-what-it-says":
+
     break;
+
   case "spotify-this-song":
-    if(params[1]){
+
       spotifySearch();
-    } else {
-      spotifySearch("The Sign");
-    }
+
     break;
+
+  case "concert-this":
+
+      concertSearch();
+
+    break;
+  case "movie-this":
+
+      movieSearch();
+
+    break;
+  
 }
 
 function spotifySearch(){
@@ -45,24 +58,55 @@ function spotifySearch(){
       });
   }
 }
-// var artist = process.argv.slice().join("");
-// axios.get("https://rest.bandsintown.com/artists/" + input + "/events?app_id=codingbootcamp").then(
-//   function(response) {
-//     console.log(response);
-//   })
-//     .catch(function(error) {
-//       // if(error.response){
-//       //   console.log(error);
-//       //   console.log("---------------Data---------------");
-//       //   console.log(error.response.data);
-//       //   console.log("---------------Status---------------");
-//       //   console.log(error.response.status);
-//       //   console.log("---------------Status---------------");
-//       //   console.log(error.response.headers);
-//       // } else if (error.request) {
-//       //   console.log(error.request);
-//       // } else {
-//       //   console.log("Error", error.message);
-//       // }
-//       console.log(error);
-//     });  
+
+function concertSearch(){
+axios.get("https://rest.bandsintown.com/artists/" + input + "/events?app_id=codingbootcamp").then(
+  function(response) {
+    // var band = response;
+    // for (var i = 0; i < band.length; i++) {
+    //   console.log("Artist/Band: " + band[i]);
+    //   console.log("----------------------------------------------------");
+    // }
+    console.log(input);
+    console.log(response);
+  })
+    .catch(function(error) {
+      // if(error.response){
+      //   console.log(error);
+      //   console.log("---------------Data---------------");
+      //   console.log(error.response.data);
+      //   console.log("---------------Status---------------");
+      //   console.log(error.response.status);
+      //   console.log("---------------Status---------------");
+      //   console.log(error.response.headers);
+      // } else if (error.request) {
+      //   console.log(error.request);
+      // } else {
+      //   console.log("Error", error.message);
+      // }
+      console.log(error);
+    });  
+}
+
+function movieSearch(){
+  axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=" + input + "").then(
+  function(response) {
+    console.log(response);
+  })
+    .catch(function(error) {
+      // if(error.response){
+      //   console.log(error);
+      //   console.log("---------------Data---------------");
+      //   console.log(error.response.data);
+      //   console.log("---------------Status---------------");
+      //   console.log(error.response.status);
+      //   console.log("---------------Status---------------");
+      //   console.log(error.response.headers);
+      // } else if (error.request) {
+      //   console.log(error.request);
+      // } else {
+      //   console.log("Error", error.message);
+      // }
+      console.log(error);
+    });  
+}
