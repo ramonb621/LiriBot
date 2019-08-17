@@ -9,8 +9,8 @@ var Spotify = require('node-spotify-api');
 var spotify = new Spotify(keys.spotify);
 
 // function spotifySearch(response){
-var artist = process.argv.slice().join("");
-spotify.search({ type: 'artist', query: artist, limit: 10 }, function(err, data) {
+var input = process.argv.slice(2);
+spotify.search({ type: 'artist', query: input, limit: 10 }, function(err, data) {
     if (err) {
       return console.log('Error occurred: ' + err);
     }
