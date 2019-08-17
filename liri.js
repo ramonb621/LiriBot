@@ -18,6 +18,8 @@ switch(params[0]){
   case "spotify-this-song":
     if(params[1]){
       spotifySearch();
+    } else {
+      spotifySearch("The Sign");
     }
     break;
 }
@@ -35,10 +37,8 @@ function spotifySearch(){
         for (var i = 0; i < songs.length; i++) {
           console.log("Artist/Band: " + songs[i].artists[0].name);
           console.log("Song: " + songs[i].name);
-          console.log("Track #: " + songs[i].track_number);
           console.log("Album: " + songs[i].album.name);
           console.log("Release Date: " + songs[i].album.release_date);
-          console.log("Release Type: " + songs[i].album.album_type);
           console.log("Preview: " + songs[i].preview_url);
           console.log("----------------------------------------------------");
         }
