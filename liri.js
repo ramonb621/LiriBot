@@ -71,7 +71,7 @@ axios.get("https://rest.bandsintown.com/artists/" + params[1] + "/events?app_id=
 
         console.log('Lineup: ' + band[i].lineup + '\nVenue Name: ' + band[i].venue.name +'\nCountry: ' + band[i].venue.country + '\nRegion: ' + band[i].venue.region + 
         '\nCity: ' +  band[i].venue.city);
-        console.log('Date: ' + moment(band[i].datetime).format("MMMM Do YYYY, h:mm:ss a"));
+        console.log('Date: ' + moment(band[i].datetime).format("MM/DD/YYYY"));
 
         console.log("---------------------------");
   }
@@ -85,26 +85,16 @@ axios.get("https://rest.bandsintown.com/artists/" + params[1] + "/events?app_id=
 }
 
 function movieSearch(){
-  axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=" + input + "").then(
+  axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=" + params[1] + "").then(
   function(response) {
-    // var movie = response.data;
-    // console.log('Title: ' + movie.Title);
-    console.log(response.Title);
+    var movie = response.data; 
+
+      console.log('Title: ' + movie.Title + '\nRelease Date: ' + movie.Released+ '\nRating: ' + movie.Ratings[0].Source + '\n' + movie.Ratings[0].Value + '\nProduced in: ' + movie.Country + '\nLanguage: ' + movie.Language + '\nPlot: ' + movie.Plot + '\nStarring: ' + movie.Actors);
+
   })
     .catch(function(error) {
-      // if(error.response){
-      //   console.log(error);
-      //   console.log("---------------Data---------------");
-      //   console.log(error.response.data);
-      //   console.log("---------------Status---------------");
-      //   console.log(error.response.status);
-      //   console.log("---------------Status---------------");
-      //   console.log(error.response.headers);
-      // } else if (error.request) {
-      //   console.log(error.request);
-      // } else {
-      //   console.log("Error", error.message);
-      // }
+
       console.log(error);
+
     });  
 }
