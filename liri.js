@@ -20,10 +20,17 @@ switch(params[0]){
 
   case "do-what-it-says":
 
+      doWhat();
+
     break;
 
   case "spotify-this-song":
-
+    
+    if(params[1] === undefined){
+      params[1] = "The Sign";
+      console.log("Defaul Search Parameter: \"The Sign\" by Ace of Base");
+      console.log("----------------------------------------------------");
+    }
       spotifySearch();
 
     break;
@@ -42,8 +49,7 @@ switch(params[0]){
 }
 
 function spotifySearch(){
-  if(this.input = "spotify-this-song" + input){
-    spotify.search({ type: 'track', query: params[1], limit: 10 }, function(err, data) {
+    spotify.search({ type: 'track', query: params[1], limit: 20 }, function(err, data) {
         if (err) {
 
           console.log("What would you like to search? \nInput \'node liri.js concert-this <artist/band name here>\' for concert info, \nnode liri.js \'spotify-this-song <song name here>\' to search a song, \nnode liri.js \'movie-this <movie name here>\' to find movie info, \nor node liri.js \'do-what-it-says\'.")
@@ -52,15 +58,15 @@ function spotifySearch(){
         }
         var songs = data.tracks.items;
         for (var i = 0; i < songs.length; i++) {
-          console.log("Artist/Band: " + songs[i].artists[0].name);
-          console.log("Song: " + songs[i].name);
-          console.log("Album: " + songs[i].album.name);
-          console.log("Release Date: " + songs[i].album.release_date);
-          console.log("Preview: " + songs[i].preview_url);
-          console.log("----------------------------------------------------");
-        }
-      });
-  }
+          
+            console.log("Artist/Band: " + songs[i].artists[0].name);
+            console.log("Song: " + songs[i].name);
+            console.log("Album: " + songs[i].album.name);
+            console.log("Release Date: " + songs[i].album.release_date);
+            console.log("Preview: " + songs[i].preview_url);
+            console.log("----------------------------------------------------");
+          }
+    });
 }
 
 function concertSearch(){
@@ -88,7 +94,11 @@ function movieSearch(){
   axios.get("http://www.omdbapi.com/?apikey=trilogy&type=movie&t=" + params[1] + "").then(
   function(response) {
     var movie = response.data; 
+    if(params[1] == ' '){
+      
+      params[1] = "Mr.Nobody";
 
+    }
       console.log('Title: ' + movie.Title + '\nRelease Date: ' + movie.Released+ '\nRating: ' + movie.Ratings[0].Source + '\n' + movie.Ratings[0].Value + '\nProduced in: ' + movie.Country + '\nLanguage: ' + movie.Language + '\nPlot: ' + movie.Plot + '\nStarring: ' + movie.Actors);
 
   })
@@ -97,4 +107,8 @@ function movieSearch(){
       console.log(error);
 
     });  
+}
+
+function doWhat(){
+
 }
