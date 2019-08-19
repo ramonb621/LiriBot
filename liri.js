@@ -2,6 +2,8 @@ require('dotenv').config({path: './.env'});
 
 var keys = require("./keys.js");
 
+var fs = require("fs");
+
 var axios = require("axios");
 
 var moment = require('moment');
@@ -25,10 +27,10 @@ switch(params[0]){
     break;
 
   case "spotify-this-song":
-    
+
     if(params[1] === undefined){
       params[1] = "The Sign";
-      console.log("Defaul Search Parameter: \"The Sign\" by Ace of Base");
+      console.log("\nDefaul Search Parameter: \"The Sign\" by Ace of Base");
       console.log("----------------------------------------------------");
     }
       spotifySearch();
@@ -41,6 +43,11 @@ switch(params[0]){
 
     break;
   case "movie-this":
+
+    if(params[1] === undefined){
+      params[1] = "Mr.Nobody";
+      console.log("\nIf you haven't watched \"Mr. Nobody,\" then you should: http://www.imdb.com/title/tt0485947/ \nIt's on Netflix!\n");
+    }
 
       movieSearch();
 
@@ -110,5 +117,32 @@ function movieSearch(){
 }
 
 function doWhat(){
+  fs.readFile("random.txt", "utf8", function(error, data) {
+    if (error) {
+      return console.log(error);
+    }
+      // console.log(data);
 
+      var dataArr = data.split(",");
+
+      params[0] = dataArr[0];
+
+      params[1] = dataArr[1];
+
+      console.log(dataArr);
+    if(dataArr[0] == "spotify-this-song"){
+
+      spotifySearch();
+
+    }else if(dataArr[0] == "movie-this"){
+
+      movieSearch();
+
+    }else if(dataArr[0] == "concert-this"){
+
+      concertSearch();
+
+    }
+    
+  });
 }
